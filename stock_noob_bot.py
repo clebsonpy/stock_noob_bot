@@ -22,6 +22,14 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 
+value = {'ITSA4': 10, 'SULA11': 10, 'BPAC11': 5, 'MYPK3': 5, 'BRAP4': 5, 'ALUP11': 5,
+                'CVCB3': 5, 'RLOG3': 5, 'MIDIA3': 5, 'B3SA3': 5, 'KLBN11': 5, 'GEPA4': 10,
+                'SUZB3': 5, 'CGRA4': 10, 'COCE5': 5}
+
+dividend = {}
+
+fii = {}
+
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
@@ -60,16 +68,14 @@ def get_stock(symbol):
     return -1
 
 
-value = {'ITSA4': 10, 'SULA11': 10, 'BPAC11': 5, 'MYPK3': 5, 'BRAP4': 5, 'ALUP11': 5,
-                'CVCB3': 5, 'RLOG3': 5, 'MIDIA3': 5, 'B3SA3': 5, 'KLBN11': 5, 'GEPA4': 10,
-                'SUZB3': 5, 'CGRA4': 10, 'COCE5': 5}
-
-
-def portfolio_value(update, context):
+def portfolio(update, context):
 
     str = ""
-    for i in value:
-        str += "{} [{}%]\n".format(i, value[i])
+    try:
+        for i in eval(context.args[0]):
+            str += "{} [{}%]\n".format(i, value[i])
+    except:
+        help(update, context)
     update.message.reply_text(str)
 
 
@@ -86,7 +92,7 @@ def main():
     # on different commands - answer in Telegram
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
-    dp.add_handler(CommandHandler("portfolio_value", portfolio_value))
+    dp.add_handler(CommandHandler("portfolio", portfolio, pass_args=True))
 
     # on noncommand i.e message - echo the message on Telegram
     dp.add_handler(MessageHandler(Filters.text, echo))
