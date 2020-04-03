@@ -11,11 +11,11 @@ bot.
 import os
 import sys
 import logging
-import urllib
 import json
-from collections import OrderedDict
 
+from collections import OrderedDict
 from telegram.ext import Updater, CommandHandler
+from urllib import request
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -26,6 +26,8 @@ logger = logging.getLogger()
 # Getting mode, so we could define run function for local and Heroku setup
 mode = os.getenv("MODE")
 TOKEN = os.getenv("TOKEN")
+api_key = os.getenv('API_KEY')
+
 if mode == "dev":
     def run(updater):
         updater.start_polling()
@@ -79,10 +81,27 @@ def error(update, context):
     logger.warning('Update "%s" caused error "%s"', update, context.error)
 
 
+def portfolio(update, context):
+
+    str = ""
+    try:
+        for i in eval(context.args[0]):
+            str += "{} [{:0.2f}%]\n".format(i, eval(context.args[0])[i])
+    except:
+        help(update, context)
+    update.message.reply_text(str)
+
+
+def stock_real_time(update, context):
+
+    stock = get_stock(context.args[0])
+    update.message.reply_text(stock)
+
+
 def get_stock(symbol):
     try:
-        url = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=' + symbol + '&interval=1min&outputsize=compact&apikey=<api_thiago>'
-        response = urllib.request.urlopen(url)
+        url = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=1min&outputsize=compact&apikey={api_key}'.format(symbol=symbol, api_key=api_key)
+        response = request.urlopen(url)
         data = json.loads(response.read().decode('utf8'), object_pairs_hook=OrderedDict)
         counter = 1
         for tick in data["Time Series (1min)"]:
@@ -95,17 +114,6 @@ def get_stock(symbol):
     return -1
 
 
-def portfolio(update, context):
-
-    str = ""
-    try:
-        for i in eval(context.args[0]):
-            str += "{} [{:0.2f}%]\n".format(i, eval(context.args[0])[i])
-    except:
-        help(update, context)
-    update.message.reply_text(str)
-
-
 if __name__ == '__main__':
     logger.info("Starting bot")
     updater = Updater(TOKEN, use_context=True)
@@ -114,5 +122,6 @@ if __name__ == '__main__':
     dp.dispatcher.add_handler(CommandHandler("start", start))
     dp.dispatcher.add_handler(CommandHandler("help", help))
     dp.dispatcher.add_handler(CommandHandler("portfolio", portfolio, pass_args=True))
+    dp.dispatcher.add_handler(CommandHandler("stock_real_time", stock_real_time, pass_args=True))
 
     run(dp)
