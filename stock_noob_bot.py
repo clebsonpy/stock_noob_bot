@@ -16,6 +16,7 @@ import json
 from collections import OrderedDict
 from telegram.ext import Updater, CommandHandler
 from urllib import request
+import functions as fct
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -46,7 +47,7 @@ else:
 
 # Stock Suno Value
 value = {'ITSA4': 10, 'SULA11': 10, 'BPAC11': 5, 'MYPK3': 5, 'BRAP4': 5, 'ALUP11': 5,
-         'CVCB3': 5, 'RLOG3': 5, 'MIDIA3': 5, 'B3SA3': 5, 'KLBN11': 5, 'GEPA4': 10,
+         'CVCB3': 5, 'RLOG3': 5, 'MDIA3': 5, 'B3SA3': 5, 'KLBN11': 5, 'GEPA4': 10,
          'SUZB3': 5, 'CGRA4': 10, 'COCE5': 5}
 
 # Stock Suno Dividend
@@ -86,7 +87,7 @@ def portfolio(update, context):
     str = ""
     try:
         for i in eval(context.args[0]):
-            str += "{} [{:0.2f}%]\n".format(i, eval(context.args[0])[i])
+            str += "**{}** [{}] [{:0.2f}%]\n".format(i, fct.get_stock(i), eval(context.args[0])[i])
     except:
         help(update, context)
     update.message.reply_text(str)
