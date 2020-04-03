@@ -60,6 +60,7 @@ fii = {'ALZR11': 100/15., 'FIIB11': 100/15., 'HGCR11': 100/15., 'HGLG11': 100/15
        'HSML11': 100/15., 'IRDM11': 100/15., 'MALL11': 100/15., 'RBRP11': 100/15., 'RBRR11': 100/15.,
        'VILG11': 100/15., 'VISC11': 100/15., 'VRTA11': 100/15., 'XPLG11': 100/15., 'XPML11': 100/15.}
 
+portfolios = ['value', 'dividend', 'fii']
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
@@ -69,7 +70,17 @@ def start(update, context):
 
 def help(update, context):
     """Send a message when the command /help is issued."""
-    update.message.reply_text('Help!')
+    try:
+        msg = 'commands /portfolio [option]\nOptions:\n'
+        if context.args[0] == 'portfolio':
+            for i in portfolios:
+                msg += '    {}\n'.format(i)
+        else:
+            msg = ""
+        update.message.reply_text(msg)
+    except:
+        msg = 'commands\n/portfolio\n/stock_real_time'
+        update.message.reply_text(msg)
 
 
 def echo(update, context):
@@ -84,35 +95,24 @@ def error(update, context):
 
 def portfolio(update, context):
 
-    str = ""
+    str = "Ticker     [Value] [Part]\n--------------------------------------------\n"
     try:
         for i in eval(context.args[0]):
-            str += "**{}** [{}] [{:0.2f}%]\n".format(i, fct.get_stock(i), eval(context.args[0])[i])
+            str += "{:10s} [R${:.2f}] [{:.2f}%]\n".format(i, fct.get_stock(i), eval(context.args[0])[i])
+        update.message.reply_text(str)
     except:
+        context.args[0] = 'portfolio'
         help(update, context)
-    update.message.reply_text(str)
 
 
 def stock_real_time(update, context):
-
-    stock = get_stock(context.args[0])
-    update.message.reply_text(stock)
-
-
-def get_stock(symbol):
     try:
-        url = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol={symbol}&interval=1min&outputsize=compact&apikey={api_key}'.format(symbol=symbol, api_key=api_key)
-        response = request.urlopen(url)
-        data = json.loads(response.read().decode('utf8'), object_pairs_hook=OrderedDict)
-        counter = 1
-        for tick in data["Time Series (1min)"]:
-            if (counter == 1):
-                close = float(data["Time Series (1min)"][tick]["4. close"])
-                return close
+        symbol = context.args[0].upper()
+        value = fct.get_stock(context.args[0])
+        _str = '{symbol} [R${value}]'.format(symbol=symbol, value=value)
+        update.message.reply_text(_str)
     except:
-        return -1
-
-    return -1
+        update.message.reply_text(-1)
 
 
 if __name__ == '__main__':
