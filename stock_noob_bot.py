@@ -21,14 +21,20 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
-
+# Stock Suno Value
 value = {'ITSA4': 10, 'SULA11': 10, 'BPAC11': 5, 'MYPK3': 5, 'BRAP4': 5, 'ALUP11': 5,
                 'CVCB3': 5, 'RLOG3': 5, 'MIDIA3': 5, 'B3SA3': 5, 'KLBN11': 5, 'GEPA4': 10,
                 'SUZB3': 5, 'CGRA4': 10, 'COCE5': 5}
 
-dividend = {}
+# Stock Suno Dividend
+dividend = {'ITSA4': 10, 'ENBR3': 10, 'TAEE11': 10, 'BBSE3': 10, 'EGIE3': 5, 'PETR4': 5,
+                'ABCB4': 5, 'TUPY3': 5, 'LEVE3': 5, 'UNIP6': 15, 'WIZS3': 5, 'VIVT4': 5,
+                'GRND3': 5}
 
-fii = {}
+# Stock Suno FII
+fii = {'ALZR11': 100/15., 'FIIB11': 100/15., 'HGCR11': 100/15., 'HGLG11': 100/15., 'HGRU11': 100/15.,
+            'HSML11': 100/15., 'IRDM11': 100/15., 'MALL11': 100/15., 'RBRP11': 100/15., 'RBRR11': 100/15.,
+            'VILG11': 100/15., 'VISC11': 100/15., 'VRTA11': 100/15., 'XPLG11': 100/15., 'XPML11': 100/15.}
 
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
@@ -73,7 +79,7 @@ def portfolio(update, context):
     str = ""
     try:
         for i in eval(context.args[0]):
-            str += "{} [{}%]\n".format(i, value[i])
+            str += "{} [{:0.2f}%]\n".format(i, eval(context.args[0])[i])
     except:
         help(update, context)
     update.message.reply_text(str)
