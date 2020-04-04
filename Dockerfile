@@ -6,4 +6,4 @@ RUN mkdir /app
 ADD . /app
 WORKDIR /app
 
-CMD python /app/stock_noob_bot.pyheroku container:login
+CMD python /app/stock_noob_bot.py
