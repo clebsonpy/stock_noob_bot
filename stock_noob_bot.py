@@ -98,12 +98,18 @@ def help(update, context):
 def portfolio(update, context):
     context.kwargs = dict()
     context.kwargs['command'] = 'portfolio'
-    str = "Ticker     [Value] [Part]\n--------------------------------------------\n"
+    str = "Ticker     [Value] [Var Day] [Part]\n--------------------------------------------\n"
     try:
+        sum_percent = 0.0102739726*5
         for i in eval(context.args[0]):
-            str += "{:10s} [R${:.2f}] [{:.2f}%]\n".format(i, fct.get_stock(i), eval(context.args[0])[i])
+            value_stock, percent = fct.get_stock(i)
+            str += "{symbol:10s} [R${value:.2f}] [{var:.2f}%] [{part:.2f}%]\n".format(
+                symbol=i, value=value_stock, var=percent, part=eval(context.args[0])[i])
+            sum_percent += (percent*eval(context.args[0])[i])/100
+        str += "Performance day [{perf_day:.2f}%]".format(perf_day=sum_percent)
         update.message.reply_text(str)
-    except:
+    except Exception as e:
+        print(e)
         help(update, context)
 
 
@@ -113,8 +119,8 @@ def stock_real_time(update, context):
     try:
         symbol = context.args[0].upper()
         try:
-            value = fct.get_stock(context.args[0])
-            _str = '{symbol} [R${value}]'.format(symbol=symbol, value=value)
+            value, percent_day = fct.get_stock(context.args[0])
+            _str = '{symbol} [R${value}] [{var:.2f}%]'.format(symbol=symbol, value=value, var=percent_day)
             update.message.reply_text(_str)
         except AttributeError:
             context.error = 'Quote not found for ticker symbol: {}'.format(symbol)
