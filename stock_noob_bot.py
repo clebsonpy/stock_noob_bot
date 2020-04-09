@@ -119,8 +119,8 @@ def stock_real_time(update, context):
     try:
         symbol = context.args[0].upper()
         try:
-            value, percent_day = fct.get_stock(context.args[0])
-            _str = '{symbol} [R${value}] [{var:.2f}%]'.format(symbol=symbol, value=value, var=percent_day)
+            value_stock, percent_day = fct.get_stock(context.args[0])
+            _str = '{symbol} [R${value:.2f}] [{var:.2f}%]'.format(symbol=symbol, value=value_stock, var=percent_day)
             update.message.reply_text(_str)
         except AttributeError:
             context.error = 'Quote not found for ticker symbol: {}'.format(symbol)
