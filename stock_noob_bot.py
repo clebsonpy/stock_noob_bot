@@ -1,21 +1,10 @@
-"""
-Simple Bot to reply to Telegram messages.
-First, a few handler functions are defined. Then, those functions are passed to
-the Dispatcher and registered at their respective places.
-Then, the bot is started and runs until we press Ctrl-C on the command line.
-Usage:
-Basic Echobot example, repeats messages.
-Press Ctrl-C on the command line or send a signal to the process to stop the
-bot.
-"""
 import os
 import sys
 import logging
-import json
 
-from collections import OrderedDict
 from telegram.ext import Updater, CommandHandler
-from urllib import request
+from telegram.bot import Bot
+import telegram
 import functions as fct
 
 # Enable logging
@@ -28,6 +17,8 @@ logger = logging.getLogger()
 mode = os.getenv("MODE")
 TOKEN = os.getenv("TOKEN")
 api_key = os.getenv('API_KEY')
+
+bot = Bot(token=TOKEN)
 
 if mode == "dev":
     def run(updater):
@@ -62,11 +53,13 @@ fii = {'ALZR11': 100/15., 'FIIB11': 100/15., 'HGCR11': 100/15., 'HGLG11': 100/15
 portfolios = ['value', 'dividend', 'fii']
 
 commands = ['help', 'portfolio', 'stock_real_time']
+
+
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
     """Send a message when the command /start is issued."""
-    update.message.reply_text('Hi!')
+    bot.send_message(chat_id=update.message.chat_id, text='Hello {}'.format(update.message.from_user.first_name))
     help(update, context)
 
 
@@ -81,7 +74,7 @@ def help(update, context):
         elif context.kwargs['command'] == 'stock_real_time':
             msg = context.error
         else:
-            msg = "commands\n"
+            msg = "Commands\n"
             for command in commands:
                 msg += '/{}\n'.format(command)
         update.message.reply_text(msg)
@@ -98,16 +91,18 @@ def help(update, context):
 def portfolio(update, context):
     context.kwargs = dict()
     context.kwargs['command'] = 'portfolio'
-    str = "Ticker     [Value] [Var Day] [Part]\n--------------------------------------------\n"
+    str = '<pre>Symbol | Price | Part | Change\n-------|-------|------|-------\n'
     try:
         sum_percent = 0.0102739726*5
         for i in eval(context.args[0]):
             value_stock, percent = fct.get_stock(i)
-            str += "{symbol:10s} [R${value:.2f}] [{var:.2f}%] [{part:.2f}%]\n".format(
+            str += "{symbol:7s}|R${value:5.2f}|{part:5.2f}%|{var:5.2f}%\n".format(
                 symbol=i, value=value_stock, var=percent, part=eval(context.args[0])[i])
             sum_percent += (percent*eval(context.args[0])[i])/100
-        str += "Performance day [{perf_day:.2f}%]".format(perf_day=sum_percent)
-        update.message.reply_text(str)
+        perf = "Performance day [{perf_day:.2f}%]".format(perf_day=sum_percent)
+        str += '</pre>'
+        bot.send_message(chat_id=update.message.chat_id, text=str, parse_mode=telegram.ParseMode.HTML)
+        update.message.reply_text(perf)
     except Exception as e:
         print(e)
         help(update, context)
@@ -117,23 +112,29 @@ def stock_real_time(update, context):
     context.kwargs = dict()
     context.kwargs['command'] = 'stock_real_time'
     try:
-        symbol = context.args[0].upper()
         try:
-            value, percent_day = fct.get_stock(context.args[0])
-            _str = '{symbol} [R${value}] [{var:.2f}%]'.format(symbol=symbol, value=value, var=percent_day)
-            update.message.reply_text(_str)
+            if len(context.args) == 0:
+                raise IndexError
+            _str = '<pre>Symbol | Price | Change\n-------|-------|-------\n'
+            for i in context.args:
+                symbol = i.upper()
+                value_stock, percent_day = fct.get_stock(symbol)
+                _str += '{symbol:7s}|R${value:5.2f}|{var:5.2f}%\n'.format(symbol=symbol, value=value_stock,
+                                                                          var=percent_day)
+            _str += '</pre>'
+            bot.send_message(chat_id=update.message.chat_id, text=_str, parse_mode=telegram.ParseMode.HTML)
+
         except AttributeError:
             context.error = 'Quote not found for ticker symbol: {}'.format(symbol)
             help(update, context)
     except IndexError:
-        context.error = "commands /stock_real_time [symbol]"
+        context.error = "commands\n /stock_real_time [symbol] [symbol] ..."
         help(update, context)
 
 
 if __name__ == '__main__':
     logger.info("Starting bot")
     updater = Updater(TOKEN, use_context=True)
-
     dp = updater
     dp.dispatcher.add_handler(CommandHandler("start", start))
     dp.dispatcher.add_handler(CommandHandler("help", help))
