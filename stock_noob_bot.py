@@ -1,23 +1,10 @@
-"""
-Simple Bot to reply to Telegram messages.
-First, a few handler functions are defined. Then, those functions are passed to
-the Dispatcher and registered at their respective places.
-Then, the bot is started and runs until we press Ctrl-C on the command line.
-Usage:
-Basic Echobot example, repeats messages.
-Press Ctrl-C on the command line or send a signal to the process to stop the
-bot.
-"""
 import os
 import sys
 import logging
-import json
 
-from collections import OrderedDict
 from telegram.ext import Updater, CommandHandler
 from telegram.bot import Bot
 import telegram
-from urllib import request
 import functions as fct
 
 # Enable logging
