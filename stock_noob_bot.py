@@ -93,7 +93,7 @@ def portfolio(update, context):
     context.kwargs['command'] = 'portfolio'
     str = '<pre>Symbol | Price | Part | Change\n-------|-------|------|-------\n'
     try:
-        sum_percent = 0.0102739726*5
+        sum_percent = 0
         for i in eval(context.args[0]):
             value_stock, percent = fct.get_stock(i)
             str += "{symbol:7s}|R${value:5.2f}|{part:5.2f}%|{var:5.2f}%\n".format(
@@ -115,11 +115,11 @@ def stock_real_time(update, context):
         try:
             if len(context.args) == 0:
                 raise IndexError
-            _str = '<pre>Symbol | Price | Change\n-------|-------|-------\n'
+            _str = '<pre>Symbol |  Price  | Change\n-------|-------|-------\n'
             for i in context.args:
                 symbol = i.upper()
                 value_stock, percent_day = fct.get_stock(symbol)
-                _str += '{symbol:7s}|R${value:5.2f}|{var:5.2f}%\n'.format(symbol=symbol, value=value_stock,
+                _str += '{symbol:7s}|R${value:7.2f}|{var:5.2f}%\n'.format(symbol=symbol, value=value_stock,
                                                                           var=percent_day)
             _str += '</pre>'
             bot.send_message(chat_id=update.message.chat_id, text=_str, parse_mode=telegram.ParseMode.HTML)
