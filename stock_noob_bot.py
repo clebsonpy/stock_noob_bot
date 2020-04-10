@@ -91,12 +91,12 @@ def help(update, context):
 def portfolio(update, context):
     context.kwargs = dict()
     context.kwargs['command'] = 'portfolio'
-    str = '<pre>Symbol | Price | Part | Change\n-------|-------|------|-------\n'
+    str = '<pre>Symbol |  Price  | Part | Change\n-------|---------|------|-------\n'
     try:
         sum_percent = 0
         for i in eval(context.args[0]):
             value_stock, percent = fct.get_stock(i)
-            str += "{symbol:7s}|R${value:5.2f}|{part:5.2f}%|{var:5.2f}%\n".format(
+            str += "{symbol:7s}|R${value:7.2f}|{part:5.2f}%|{var:5.2f}%\n".format(
                 symbol=i, value=value_stock, var=percent, part=eval(context.args[0])[i])
             sum_percent += (percent*eval(context.args[0])[i])/100
         perf = "Performance day [{perf_day:.2f}%]".format(perf_day=sum_percent)
