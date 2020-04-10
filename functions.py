@@ -11,7 +11,7 @@ def get_stock(symbol):
         value_ = df.close[-2]
         percent_day = ((value - value_)/value_)*100
         return value, percent_day
-    except AttributeError:
+    except:
         raise AttributeError(ticker.financial_data)
 
 def main():
