@@ -1,16 +1,21 @@
 from yahooquery import Ticker
+import datetime
 
 
 def get_stock(symbol):
-    symbol = symbol+'.SA'
-    ticker = Ticker(symbol)
-    data = ticker.financial_data.get(symbol)
-    value = data.get('currentPrice')
-    return value
-
+    try:
+        symbol = symbol+'.SA'
+        ticker = Ticker(symbol)
+        df = ticker.history(period='1mo', interval='1d')
+        value = df.close[-1]
+        value_ = df.close[-2]
+        percent_day = ((value - value_)/value_)*100
+        return value, percent_day
+    except AttributeError:
+        raise AttributeError(ticker.financial_data)
 
 def main():
-    print(get_stock('PETR4'))
+    print(get_stock('sula11'))
 
 
 if __name__ == '__main__':

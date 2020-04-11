@@ -1,21 +1,10 @@
-"""
-Simple Bot to reply to Telegram messages.
-First, a few handler functions are defined. Then, those functions are passed to
-the Dispatcher and registered at their respective places.
-Then, the bot is started and runs until we press Ctrl-C on the command line.
-Usage:
-Basic Echobot example, repeats messages.
-Press Ctrl-C on the command line or send a signal to the process to stop the
-bot.
-"""
 import os
 import sys
 import logging
-import json
 
-from collections import OrderedDict
 from telegram.ext import Updater, CommandHandler
-from urllib import request
+from telegram.bot import Bot
+import telegram
 import functions as fct
 
 # Enable logging
@@ -29,6 +18,8 @@ mode = os.getenv("MODE")
 TOKEN = os.getenv("TOKEN")
 api_key = os.getenv('API_KEY')
 
+bot = Bot(token=TOKEN)
+
 if mode == "dev":
     def run(updater):
         updater.start_polling()
@@ -36,7 +27,6 @@ elif mode == "prod":
     def run(updater):
         PORT = int(os.environ.get("PORT", "8443"))
         HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME")
-        # Code from https://github.com/python-telegram-bot/python-telegram-bot/wiki/Webhooks#heroku
         updater.start_webhook(listen="0.0.0.0",
                               port=PORT,
                               url_path=TOKEN)
@@ -61,64 +51,90 @@ fii = {'ALZR11': 100/15., 'FIIB11': 100/15., 'HGCR11': 100/15., 'HGLG11': 100/15
        'VILG11': 100/15., 'VISC11': 100/15., 'VRTA11': 100/15., 'XPLG11': 100/15., 'XPML11': 100/15.}
 
 portfolios = ['value', 'dividend', 'fii']
+
+commands = ['help', 'portfolio', 'stock_real_time']
+
+
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
     """Send a message when the command /start is issued."""
-    update.message.reply_text('Hi!')
+    bot.send_message(chat_id=update.message.chat_id, text='Hello {}'.format(update.message.from_user.first_name))
+    help(update, context)
 
 
 def help(update, context):
     """Send a message when the command /help is issued."""
+
     try:
-        msg = 'commands /portfolio [option]\nOptions:\n'
-        if context.args[0] == 'portfolio':
+        if context.kwargs['command'] == 'portfolio':
+            msg = 'commands /portfolio [option]\nOptions:\n'
             for i in portfolios:
                 msg += '    {}\n'.format(i)
+        elif context.kwargs['command'] == 'stock_real_time':
+            msg = context.error
         else:
-            msg = ""
+            msg = "Commands\n"
+            for command in commands:
+                msg += '/{}\n'.format(command)
         update.message.reply_text(msg)
-    except:
-        msg = 'commands\n/portfolio\n/stock_real_time'
-        update.message.reply_text(msg)
 
-
-def echo(update, context):
-    """Echo the user message."""
-    update.message.reply_text(update.message.text)
-
-
-def error(update, context):
-    """Log Errors caused by Updates."""
-    logger.warning('Update "%s" caused error "%s"', update, context.error)
+    except AttributeError:
+        context.kwargs = dict()
+        if len(context.args) == 1 and context.args[0] in commands:
+            context.kwargs['command'] = context.args[0]
+        else:
+            context.kwargs['command'] = 'help'
+        help(update, context)
 
 
 def portfolio(update, context):
-
-    str = "Ticker     [Value] [Part]\n--------------------------------------------\n"
+    context.kwargs = dict()
+    context.kwargs['command'] = 'portfolio'
+    str = '<pre>Symbol |  Price  | Part | Change\n-------|---------|------|-------\n'
     try:
+        sum_percent = 0
         for i in eval(context.args[0]):
-            str += "{:10s} [R${:.2f}] [{:.2f}%]\n".format(i, fct.get_stock(i), eval(context.args[0])[i])
-        update.message.reply_text(str)
-    except:
-        context.args[0] = 'portfolio'
+            value_stock, percent = fct.get_stock(i)
+            str += "{symbol:7s}|R${value:7.2f}|{part:5.2f}%|{var:5.2f}%\n".format(
+                symbol=i, value=value_stock, var=percent, part=eval(context.args[0])[i])
+            sum_percent += (percent*eval(context.args[0])[i])/100
+        perf = "Performance day [{perf_day:.2f}%]".format(perf_day=sum_percent)
+        str += '</pre>'
+        bot.send_message(chat_id=update.message.chat_id, text=str, parse_mode=telegram.ParseMode.HTML)
+        update.message.reply_text(perf)
+    except Exception as e:
+        print(e)
         help(update, context)
 
 
 def stock_real_time(update, context):
+    context.kwargs = dict()
+    context.kwargs['command'] = 'stock_real_time'
     try:
-        symbol = context.args[0].upper()
-        value = fct.get_stock(context.args[0])
-        _str = '{symbol} [R${value}]'.format(symbol=symbol, value=value)
-        update.message.reply_text(_str)
-    except:
-        update.message.reply_text(-1)
+        try:
+            if len(context.args) == 0:
+                raise IndexError
+            _str = '<pre>Symbol |  Price  | Change\n-------|-------|-------\n'
+            for i in context.args:
+                symbol = i.upper()
+                value_stock, percent_day = fct.get_stock(symbol)
+                _str += '{symbol:7s}|R${value:7.2f}|{var:5.2f}%\n'.format(symbol=symbol, value=value_stock,
+                                                                          var=percent_day)
+            _str += '</pre>'
+            bot.send_message(chat_id=update.message.chat_id, text=_str, parse_mode=telegram.ParseMode.HTML)
+
+        except AttributeError:
+            context.error = 'Quote not found for ticker symbol: {}'.format(symbol)
+            help(update, context)
+    except IndexError:
+        context.error = "commands\n /stock_real_time [symbol] [symbol] ..."
+        help(update, context)
 
 
 if __name__ == '__main__':
     logger.info("Starting bot")
     updater = Updater(TOKEN, use_context=True)
-
     dp = updater
     dp.dispatcher.add_handler(CommandHandler("start", start))
     dp.dispatcher.add_handler(CommandHandler("help", help))
