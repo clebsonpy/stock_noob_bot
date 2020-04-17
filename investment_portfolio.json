@@ -1,0 +1,604 @@
+{
+  "suno": {
+    "value": [
+      {
+        "company": "Itausa",
+        "symbol": "ITSA4",
+        "start_date": "18/08/2017",
+        "allocation": 0.1,
+        "current_price": 9.24,
+        "ceiling_price": 14.00,
+        "adjusted_start_price": 7.18
+      },
+      {
+        "company": "SulAmerica",
+        "symbol": "SULA11",
+        "start_date": "18/08/2017",
+        "allocation": 0.1,
+        "current_price": 39.30,
+        "ceiling_price": 48.00,
+        "adjusted_start_price": 16.33
+      },
+      {
+        "company": "BTGPactual",
+        "symbol": "BPAC11",
+        "start_date": "06/03/2020",
+        "allocation": 0.05,
+        "current_price": 40.56,
+        "ceiling_price": 67.00,
+        "adjusted_start_price": 57.62
+      },
+      {
+        "company": "Localiza",
+        "symbol": "RENT3",
+        "start_date": "03/04/2020",
+        "allocation": 0.05,
+        "current_price": 29.50,
+        "ceiling_price": 35.00,
+        "adjusted_start_price": 23.21
+      },
+      {
+        "company": "Iochpe-Maxion",
+        "symbol": "MYPK3",
+        "start_date": "11/10/2019",
+        "allocation": 0.05,
+        "current_price": 11.25,
+        "ceiling_price": 25.00,
+        "adjusted_start_price": 18.54
+      },
+      {
+        "company": "Bradespar",
+        "symbol": "BRAP4",
+        "start_date": "10/01/2020",
+        "allocation": 0.05,
+        "current_price": 29.54,
+        "ceiling_price": 43.00,
+        "adjusted_start_price": 38.29
+      },
+      {
+        "company": "Alupar",
+        "symbol": "ALUP11",
+        "start_date": "05/01/2018",
+        "allocation": 0.05,
+        "current_price": 22.47,
+        "ceiling_price": 31.00,
+        "adjusted_start_price": 17.05
+      },
+      {
+        "company": "CVC",
+        "symbol": "CVCB3",
+        "start_date": "22/11/2019",
+        "allocation": 0.05,
+        "current_price": 12.80,
+        "ceiling_price": 46.00,
+        "adjusted_start_price": 41.49
+      },
+      {
+        "company": "Cosan",
+        "symbol": "RLOG3",
+        "start_date": "26/07/2019",
+        "allocation": 0.05,
+        "current_price": 15.89,
+        "ceiling_price": 23.00,
+        "adjusted_start_price": 18.65
+      },
+      {
+        "company": "M Dias Branco SA",
+        "symbol": "MDIA3",
+        "start_date": "07/06/2019",
+        "allocation": 0.05,
+        "current_price": 30.00,
+        "ceiling_price": 40.00,
+        "adjusted_start_price": 37.52
+      },
+      {
+        "company": "B3",
+        "symbol": "B3SA3",
+        "start_date": "01/06/2018",
+        "allocation": 0.05,
+        "current_price": 38.07,
+        "ceiling_price": 40.00,
+        "adjusted_start_price": 21.22
+      },
+      {
+        "company": "Klabin",
+        "symbol": "KLBN11",
+        "start_date": "24/05/2019",
+        "allocation": 0.05,
+        "current_price": 16.26,
+        "ceiling_price": 17.00,
+        "adjusted_start_price": 14.72
+      },
+      {
+        "company": "Duke Energy",
+        "symbol": "GEPA4",
+        "start_date": "18/08/2017",
+        "allocation": 0.1,
+        "current_price": 43.49,
+        "ceiling_price": 50.00,
+        "adjusted_start_price": 32.08
+      },
+      {
+        "company": "Suzano",
+        "symbol": "SUZB3",
+        "start_date": "11/01/2019",
+        "allocation": 0.05,
+        "current_price": 36.77,
+        "ceiling_price": 42.00,
+        "adjusted_start_price": 38.43
+      },
+      {
+        "company": "Grazziotin",
+        "symbol": "CGRA4",
+        "start_date": "18/08/2017",
+        "allocation": 0.1,
+        "current_price": 21.92,
+        "ceiling_price": 28.00,
+        "adjusted_start_price": 21.94
+      },
+      {
+        "company": "Coelce",
+        "symbol": "COCE5",
+        "start_date": "18/08/2017",
+        "allocation": 0.05,
+        "current_price": 47.79,
+        "ceiling_price": 55.00,
+        "adjusted_start_price": 47.08
+      }
+    ],
+    "dividend":{
+        "recommended": [
+        {
+          "company": "Itausa",
+          "symbol": "ITSA4",
+          "start_date": "18/05/2017",
+          "dividend_yield_expected": "8.1%",
+          "allocation": 0.1,
+          "current_price": 9.36,
+          "ceiling_price": 14.00,
+          "adjusted_start_price": 6.50
+        },
+        {
+          "company": "Energias do Brasil",
+          "symbol": "ENBR3",
+          "start_date": "06/02/2017",
+          "dividend_yield_expected": "5.2%",
+          "allocation": 0.1,
+          "current_price": 16.29,
+          "ceiling_price": 25.00,
+          "adjusted_start_price": 12.35
+        },
+        {
+          "company": "Taesa",
+          "symbol": "TAE11",
+          "start_date": "06/02/2017",
+          "dividend_yield_expected": "8.8%",
+          "allocation": 0.1,
+          "current_price": 27.42,
+          "ceiling_price": 35.00,
+          "adjusted_start_price": 16.38
+        },
+        {
+          "company": "BB Seguridade",
+          "symbol": "BBSE3",
+          "start_date": "30/03/2017",
+          "dividend_yield_expected": "7.5%",
+          "allocation": 0.1,
+          "current_price": 26.64,
+          "ceiling_price": 33.75,
+          "adjusted_start_price": 22.21
+        },
+        {
+          "company": "Engie Brasil Energia",
+          "symbol": "EGIE3",
+          "start_date": "12/03/2020",
+          "dividend_yield_expected": "8.5%",
+          "allocation": 0.05,
+          "current_price": 41.21,
+          "ceiling_price": 47.00,
+          "adjusted_start_price": 43.84
+        },
+        {
+          "company": "Petrobras",
+          "symbol": "PETR4",
+          "start_date": "16/01/2020",
+          "dividend_yield_expected": "3.8%",
+          "allocation": 0.05,
+          "current_price": 17.15,
+          "ceiling_price": 30.00,
+          "adjusted_start_price": 29.52
+        },
+        {
+          "company": "Unipar",
+          "symbol": "UNIP6",
+          "start_date": "06/02/2017",
+          "dividend_yield_expected": "4.1%",
+          "allocation": 0.15,
+          "current_price": 24.65,
+          "ceiling_price": 35.00,
+          "adjusted_start_price": 3.16
+        },
+        {
+          "company": "Tupy",
+          "symbol": "TUPY3",
+          "start_date": "08/02/2018",
+          "dividend_yield_expected": "4.8%",
+          "allocation": 0.05,
+          "current_price": 13.51,
+          "ceiling_price": 20.00,
+          "adjusted_start_price": 15.53
+        },
+        {
+          "company": "MAHLE-Metal Leve",
+          "symbol": "LEVE3",
+          "start_date": "18/04/2019",
+          "dividend_yield_expected": "7.6%",
+          "allocation": 0.05,
+          "current_price": 17.69,
+          "ceiling_price": 25.00,
+          "adjusted_start_price": 21.05
+        },
+        {
+          "company": "Banco ABC",
+          "symbol": "ABCB4",
+          "start_date": "09/11/2017",
+          "dividend_yield_expected": "8.2%",
+          "allocation": 0.05,
+          "current_price": 13.99,
+          "ceiling_price": 22.00,
+          "adjusted_start_price": 13.66
+        },
+        {
+          "company": "Wiz Soluções e Corretagem de Seguros",
+          "symbol": "WIZS3",
+          "start_date": "06/02/2017",
+          "dividend_yield_expected": "7.4%",
+          "allocation": 0.1,
+          "current_price": 9.48,
+          "ceiling_price": 15.50,
+          "adjusted_start_price": 11.07
+        },
+        {
+          "company": "Telefônica Brasil",
+          "symbol": "VIVT4",
+          "start_date": "30/08/2018",
+          "dividend_yield_expected": "5.6%",
+          "allocation": 0.05,
+          "current_price": 52.63,
+          "ceiling_price": 53.00,
+          "adjusted_start_price": 35.60
+        },
+        {
+          "company": "Grendene",
+          "symbol": "GRND3",
+          "start_date": "31/05/2018",
+          "dividend_yield_expected": "6.1%",
+          "allocation": 0.05,
+          "current_price": 7.37,
+          "ceiling_price": 8.33,
+          "adjusted_start_price": 7.40
+        }
+      ],
+        "closed": [
+        {
+          "company": "AES Tietê",
+          "symbol": "TIET11",
+          "start_date": "18/05/2017",
+          "closing_date": "05/03/2020",
+          "entry_price": 10.43,
+          "exit_price": 18.57,
+          "performance": "78%"
+        },
+        {
+          "company": "Multiplus",
+          "symbol": "MPLU3",
+          "start_date": "06/02/2017",
+          "closing_date": "01/04/2019",
+          "entry_price": 30.67,
+          "exit_price": 26.84,
+          "performance": "-12.49%"
+        },
+        {
+          "company": "Comgás",
+          "symbol": "CGAS3",
+          "start_date": "17/01/2019",
+          "closing_date": "24/01/2019",
+          "entry_price": 64.97,
+          "exit_price": 79.20,
+          "performance": "21.90%"
+        },
+        {
+          "company": "IRB Brasil RE",
+          "symbol": "IRBR3",
+          "start_date": "07/08/2017",
+          "closing_date": "19/07/2018",
+          "entry_price": 26.98,
+          "exit_price": 79.20,
+          "performance": "98.93%"
+        },
+        {
+          "company": "Ezetec",
+          "symbol": "EZTC3",
+          "start_date": "06/01/2017",
+          "closing_date": "20/09/2017",
+          "entry_price": 17.82,
+          "exit_price": 23.20,
+          "performance": "30.19%"
+        } 
+      ]
+    },
+    "fii":{
+        "recommended": [
+        {
+          "company": "Alianza Trust Renda Imobiliária",
+          "symbol": "ALZR11",
+          "start_date": "05/06/2019",
+          "dividend_yield_expected": "6.5%",
+          "allocation": 0.067,
+          "current_price": 107.49,
+          "ceiling_price": 103.00,
+          "adjusted_start_price": 104.49
+        },
+        {
+          "company": "Industrial do Brasil",
+          "symbol": "FIIB11",
+          "start_date": "17/01/2018",
+          "dividend_yield_expected": "5.7%",
+          "allocation": 0.067,
+          "current_price": 480.65,
+          "ceiling_price": 485.00,
+          "adjusted_start_price": 351.91
+        },
+        {
+          "company": "CSHG Recebíveis Imobiliários",
+          "symbol": "HGCR11",
+          "start_date": "12/06/2019",
+          "dividend_yield_expected": "7.2%",
+          "allocation": 0.067,
+          "current_price": 95.98,
+          "ceiling_price": 100.00,
+          "adjusted_start_price": 106.22
+        },
+        {
+          "company": "CSHG Logística",
+          "symbol": "HGLG11",
+          "start_date": "08/08/2017",
+          "dividend_yield_expected": "5.6%",
+          "allocation": 0.067,
+          "current_price": 173.87,
+          "ceiling_price": 140.75,
+          "adjusted_start_price": 98.28
+        },
+        {
+          "company": "CSHG Renda Urbana",
+          "symbol": "HGRU11",
+          "start_date": "30/08/2019",
+          "dividend_yield_expected": "7.5%",
+          "allocation": 0.067,
+          "current_price": 112.95,
+          "ceiling_price": 125.00,
+          "adjusted_start_price": 108.06
+        },
+        {
+          "company": "FII HSI MALL",
+          "symbol": "HSML11",
+          "start_date": "21/11/2019",
+          "dividend_yield_expected": "3.7%",
+          "allocation": 0.067,
+          "current_price": 84.22,
+          "ceiling_price": 100.00,
+          "adjusted_start_price": 103.35
+        },
+        {
+          "company": "Iridium Recebíveis Imobiliários",
+          "symbol": "IRDM11",
+          "start_date": "13/11/2019",
+          "dividend_yield_expected": "7.5%",
+          "allocation": 0.067,
+          "current_price": 99.99,
+          "ceiling_price": 110.00,
+          "adjusted_start_price": 106.23
+        },
+        {
+          "company": "Malls Brasil Plural",
+          "symbol": "MALL11",
+          "start_date": "28/02/2018",
+          "dividend_yield_expected": "3.8%",
+          "allocation": 0.067,
+          "current_price": 82.50,
+          "ceiling_price": 100.00,
+          "adjusted_start_price": 88.05
+        },
+        {
+          "company": "RBR Properties",
+          "symbol": "RBRP11",
+          "start_date": "11/03/2020",
+          "dividend_yield_expected": "6.4%",
+          "allocation": 0.067,
+          "current_price": 77.95,
+          "ceiling_price": 88.00,
+          "adjusted_start_price": 89.35
+        },
+        {
+          "company": "RBR Rendimento High Grade",
+          "symbol": "RBRR11",
+          "start_date": "28/11/2018",
+          "dividend_yield_expected": "6.6%",
+          "allocation": 0.067,
+          "current_price": 94.26,
+          "ceiling_price": 95.00,
+          "adjusted_start_price": 88.91
+        },
+        {
+          "company": "Vinci Logística",
+          "symbol": "VILG11",
+          "start_date": "19/02/2020",
+          "dividend_yield_expected": "6.5%",
+          "allocation": 0.067,
+          "current_price": 105.41,
+          "ceiling_price": 112.00,
+          "adjusted_start_price": 125.00
+        },
+        {
+          "company": "Vinci Shopping Centers",
+          "symbol": "VISC11",
+          "start_date": "02/05/2018",
+          "dividend_yield_expected": "3.2%",
+          "allocation": 0.067,
+          "current_price": 98.07,
+          "ceiling_price": 100.00,
+          "adjusted_start_price": 92.46
+        },
+        {
+          "company": "Fator Verita",
+          "symbol": "VRTA11",
+          "start_date": "22/11/2017",
+          "dividend_yield_expected": "6.7%",
+          "allocation": 0.067,
+          "current_price": 111.33,
+          "ceiling_price": 110.00,
+          "adjusted_start_price": 76.36
+        },
+        {
+          "company": "XP Log",
+          "symbol": "XPLG11",
+          "start_date": "11/09/2019",
+          "dividend_yield_expected": "6.4%",
+          "allocation": 0.067,
+          "current_price": 106.90,
+          "ceiling_price": 108.00,
+          "adjusted_start_price": 99.81
+        },
+        {
+          "company": "XP Malls FII",
+          "symbol": "XPML11",
+          "start_date": "11/09/2019",
+          "dividend_yield_expected": "2.7%",
+          "allocation": 0.067,
+          "current_price": 91.99,
+          "ceiling_price": 97.00,
+          "adjusted_start_price": 88.55
+        }
+      ],
+        "closed": [
+        {
+          "company": "GGR Covepi Renda",
+          "symbol": "GGRC11",
+          "start_date": "",
+          "closing_date": "21/11/2019",
+          "entry_price": 78.06,
+          "exit_price": 144.50,
+          "performance": "85%"
+        },
+        {
+          "company": "Maxi Renda",
+          "symbol": "MXRF11",
+          "start_date": "",
+          "closing_date": "26/06/2019",
+          "entry_price": 7.40,
+          "exit_price": 12.33,
+          "performance": "64%"
+        },
+        {
+          "company": "Rio Negro",
+          "symbol": "RNGO11",
+          "start_date": "",
+          "closing_date": "19/06/2019",
+          "entry_price": 84.87,
+          "exit_price": 83.20,
+          "performance": "-2%"
+        },
+        {
+          "company": "JS Real Estate Multigestão",
+          "symbol": "JSRE11",
+          "start_date": "",
+          "closing_date": "28/11/2018",
+          "entry_price": 91.10,
+          "exit_price": 98.38,
+          "performance": "8%"
+        },
+        {
+          "company": "Presidente Vargas",
+          "symbol": "PRSV11",
+          "start_date": "",
+          "closing_date": "28/11/2018",
+          "entry_price": 457.47,
+          "exit_price": 334.55,
+          "performance": "-27%"
+        },
+        {
+          "company": "GGR Covepi Renda",
+          "symbol": "EDGA11",
+          "start_date": "",
+          "closing_date": "28/11/2018",
+          "entry_price": 51.58,
+          "exit_price": 45.27,
+          "performance": "-12%"
+        },
+        {
+          "company": "Maxi Renda",
+          "symbol": "BCRI11",
+          "start_date": "",
+          "closing_date": "28/11/2018",
+          "entry_price": 97.24,
+          "exit_price": 107.15,
+          "performance": "10%"
+        },
+        {
+          "company": "Rio Negro",
+          "symbol": "JRDM11",
+          "start_date": "",
+          "closing_date": "28/11/2018",
+          "entry_price": 69.17,
+          "exit_price": 74.00,
+          "performance": "7%"
+        },
+        {
+          "company": "JS Real Estate Multigestão",
+          "symbol": "HGJH11",
+          "start_date": "",
+          "closing_date": "28/11/2018",
+          "entry_price": 106.63,
+          "exit_price": 167.00,
+          "performance": "57%"
+        },
+        {
+          "company": "FII BTG Pactual Fundo de CRI",
+          "symbol": "FEXC11",
+          "start_date": "",
+          "closing_date": "28/11/2018",
+          "entry_price": 87.34,
+          "exit_price": 109.33,
+          "performance": "25%"
+        },
+        {
+          "company": "Fundo de Investimento Imobiliario Cyrela Thera Corporate",
+          "symbol": "THRA11",
+          "start_date": "",
+          "closing_date": "27/09/2018",
+          "entry_price": 80.02,
+          "exit_price": 102.25,
+          "performance": "28%"
+        },
+        {
+          "company": "Kinea Indices Precos Fundo de Investimento Imobiliario",
+          "symbol": "KNIP11",
+          "start_date": "",
+          "closing_date": "12/06/2018",
+          "entry_price": 93.63,
+          "exit_price": 118.23,
+          "performance": "26%"
+        },
+        {
+          "company": "Merito Desenvolvimento Imobiliario",
+          "symbol": "MFII11",
+          "start_date": "",
+          "closing_date": "20/09/2017",
+          "entry_price": 94.97,
+          "exit_price": 120.00,
+          "performance": "26%"
+        }
+      ]
+    }
+  }
+}
